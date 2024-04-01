@@ -4,6 +4,7 @@ import NewDishes from "../helpPage/NewDishes";
 import Advertisement from "../helpPage/Advertisement";
 import ActiveUsers from "../helpPage/ActiveUsers";
 import Events from "../helpPage/Events";
+import "../../css/home.css";
 
 export default function HomePage() {
   return (
