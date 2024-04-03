@@ -1,9 +1,9 @@
-import Statistics from "../helpPage/Statistics";
-import PopularDishes from "../helpPage/PopularDishes";
-import NewDishes from "../helpPage/NewDishes";
-import Advertisement from "../helpPage/Advertisement";
-import ActiveUsers from "../helpPage/ActiveUsers";
-import Events from "../helpPage/Events";
+import Statistics from "./Statistics";
+import PopularDishes from "./PopularDishes";
+import NewDishes from "./NewDishes";
+import Advertisement from "./Advertisement";
+import ActiveUsers from "./ActiveUsers";
+import Events from "./Events";
 import "../../css/home.css";
 
 export default function HomePage() {
