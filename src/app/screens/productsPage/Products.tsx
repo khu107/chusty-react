@@ -56,20 +56,20 @@ export default function Products() {
           </Stack>
           <Stack className="list-category-section">
             <Stack className="product-category">
-              <Button variant="contained" color="secondary">
-                Other
+              <Button variant="contained" color="primary">
+                Dish
               </Button>
               <Button variant="contained" color="secondary">
-                Dessert
+                Saled
               </Button>
               <Button variant="contained" color="secondary">
                 Drink
               </Button>
               <Button variant="contained" color="secondary">
-                Saled
+                Other
               </Button>
-              <Button variant="contained" color="primary">
-                Dish
+              <Button variant="contained" color="secondary">
+                Dessert
               </Button>
             </Stack>
             <Stack className="products-wapper">
