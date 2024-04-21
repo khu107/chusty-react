@@ -29,7 +29,9 @@ function App() {
         <Route path="/help">
           <HelpPage />
         </Route>
-        <Route path="/">{/* <HomePage /> */}</Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
       </Switch>
       <Footer />
     </>
