@@ -4,13 +4,19 @@ import { CssVarsProvider, Typography } from "@mui/joy";
 import CardOverflow from "@mui/joy/CardOverflow";
 import AspectRatio from "@mui/joy/AspectRatio";
 
-const activeUsers = [
-  { memberNick: "Martin", imagePath: "/img/martin.webp" },
-  { memberNick: "Justin", imagePath: "/img/justin.webp" },
-  { memberNick: "Rose", imagePath: "/img/rose.webp" },
-  { memberNick: "Nusret", imagePath: "/img/nusret.webp" },
-];
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveTopUsers } from "./selector";
+import { serverApi } from "../../../lib/config";
+import { Member } from "../../../lib/types/member";
+
+const topUsersRetriever = createSelector(retrieveTopUsers, (topUsers) => ({
+  topUsers,
+}));
+
 export default function ActiveUsers() {
+  const { topUsers } = useSelector(topUsersRetriever);
+
   return (
     <div className="active-users-frame">
       <Container>
@@ -18,18 +24,19 @@ export default function ActiveUsers() {
           <Box className="category-title">Active Users</Box>
           <Stack className="cards-frame">
             <CssVarsProvider>
-              {activeUsers.length !== 0 ? (
-                activeUsers.map((ele, index) => {
+              {topUsers.length !== 0 ? (
+                topUsers.map((member: Member) => {
+                  const imagePath = `${serverApi}/${member.memberImage}`;
                   return (
-                    <Card key={index} variant="outlined" className="card">
+                    <Card key={member._id} variant="outlined" className="card">
                       <CardOverflow>
                         <AspectRatio ratio="1">
-                          <img src={ele.imagePath} alt="" />
+                          <img src={imagePath} alt="imagePath" />
                         </AspectRatio>
                       </CardOverflow>
                       <CardOverflow>
                         <Typography className="member-nickname">
-                          {ele.memberNick}
+                          {member.memberNick}
                         </Typography>
                       </CardOverflow>
                     </Card>
