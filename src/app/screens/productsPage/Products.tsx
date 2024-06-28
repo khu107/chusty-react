@@ -1,4 +1,9 @@
 import { Box, Button, Container, Stack } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -35,6 +40,8 @@ interface ProductsProps {
 
 export default function Products(props: ProductsProps) {
   const { onAdd } = props;
+  const [age, setAge] = useState("createdAt");
+
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState<ProductInquery>({
@@ -68,9 +75,10 @@ export default function Products(props: ProductsProps) {
     setProductSearch({ ...productSearch });
   };
 
-  const searchOrderHandler = (order: string) => {
+  const searchOrderHandler = (order: SelectChangeEvent) => {
     productSearch.page = 1;
-    productSearch.order = order;
+    productSearch.order = order.target.value;
+    setAge(order.target.value);
     setProductSearch({ ...productSearch });
   };
 
@@ -118,7 +126,21 @@ export default function Products(props: ProductsProps) {
             </Stack>
           </Stack>
           <Stack className="dishes-filter-section">
-            <Button
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <span>Sort</span>
+              <Select
+                value={age}
+                onChange={searchOrderHandler}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                {/* <MenuItem value=""></MenuItem> */}
+                <MenuItem value={"createdAt"}>createdAt</MenuItem>
+                <MenuItem value={"productPrice"}>productPrice</MenuItem>
+                <MenuItem value={"productViews"}>productViews</MenuItem>
+              </Select>
+            </FormControl>
+            {/* <Button
               variant="contained"
               className="order"
               color={
@@ -147,7 +169,7 @@ export default function Products(props: ProductsProps) {
               onClick={() => searchOrderHandler("productViews")}
             >
               Views
-            </Button>
+            </Button> */}
           </Stack>
           <Stack className="list-category-section">
             <Stack className="product-category">
@@ -301,7 +323,7 @@ export default function Products(props: ProductsProps) {
         </Stack>
       </Container>
       <div className="brands-logo">
-        <Box className="brand-text">Our Family Brands</Box>
+        <Box className="brand-text">Meet Our Team</Box>
         <Stack className="brand-cards">
           <Box className="brand-card">
             <img src="/img/family1.png" alt="" />

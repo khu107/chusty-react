@@ -6,8 +6,9 @@ import {
   Menu,
   MenuItem,
   Stack,
+  Typography,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Basket from "./Basket";
 import { useState } from "react";
 import { CartItem } from "../../../lib/types/search";
@@ -44,17 +45,20 @@ export default function HomeNavbar(props: HomeNavbarProps) {
     handleLogoutRequest,
   } = props;
   const { authMember } = useGlobals();
-
-  const [count, setCount] = useState<number>(0);
-  const [value, setValue] = useState<boolean>(true);
-
+  const history = useHistory();
   return (
     <div className="home-navbar">
       <Container className="navbar-container">
         <Stack className="menu ">
           <Box>
             <NavLink to="/">
-              <img className="brand-logo" alt="burak" src="/icons/burak.svg" />
+              <Typography
+                variant="h1"
+                sx={{ color: "white", fontWeight: "bold" }}
+              >
+                CHUSTY
+              </Typography>
+              {/* <img className="brand-logo" alt="burak" src="/icons/burak.svg" /> */}
             </NavLink>
           </Box>
           <Stack className="links">
@@ -95,30 +99,42 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               onDelete={onDelete}
               onDeleteAll={onDeleteAll}
             />
-
-            {!authMember ? (
-              <Box>
-                <Button
-                  variant="contained"
-                  className="login-button"
-                  onClick={() => setLoginOpen(true)}
-                >
-                  Login
-                </Button>
+            <div style={{ display: "flex", gap: "10px" }}>
+              {!authMember ? (
+                <Box>
+                  <Button
+                    sx={{ width: "100px" }}
+                    variant="contained"
+                    className="login-button"
+                    onClick={() => setLoginOpen(true)}
+                  >
+                    Login
+                  </Button>
+                </Box>
+              ) : (
+                <img
+                  className="user-avatar"
+                  src={
+                    authMember?.memberImage
+                      ? `${serverApi}/${authMember?.memberImage}`
+                      : "/icons/default-user.svg"
+                  }
+                  alt="memberImage"
+                  onClick={handleLogoutClick}
+                />
+              )}
+              <Box className={"signup"}>
+                {!authMember ? (
+                  <Button
+                    variant="contained"
+                    className="login-button"
+                    onClick={() => setSignupOpen(true)}
+                  >
+                    SIGN UP
+                  </Button>
+                ) : null}
               </Box>
-            ) : (
-              <img
-                className="user-avatar"
-                src={
-                  authMember?.memberImage
-                    ? `${serverApi}/${authMember?.memberImage}`
-                    : "/icons/default-user.svg"
-                }
-                alt="memberImage"
-                onClick={handleLogoutClick}
-              />
-            )}
-
+            </div>
             <Menu
               anchorEl={anchorEl}
               id="account-menu"
@@ -170,18 +186,15 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             </Box>
             <Box className={"wel-txt"}>The Choice, not a choice</Box>
             <Box className={"service-txt"}>24 hours service</Box>
-            <Box className={"signup"}>
-              {!authMember ? (
-                <Button
-                  variant="contained"
-                  className="signup-button"
-                  onClick={() => setSignupOpen(true)}
-                >
-                  SIGN UP
-                </Button>
-              ) : null}
-            </Box>
+            <Button
+              variant="contained"
+              className="signup-button"
+              onClick={() => history.push("/products")}
+            >
+              Order Now
+            </Button>
           </Stack>
+
           <Box className="logo-frame">
             <div className="logo-img"></div>
           </Box>

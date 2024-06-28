@@ -8,32 +8,22 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
 export default function Events() {
   return (
     <div className={"events-frame"}>
-      <Stack className={"events-main"}>
+      <Stack className={"events-main"} sx={{ padding: "20px" }}>
         <Box className={"events-text"}>
           <span className={"category-title"}>Events</span>
         </Box>
 
-        <Swiper
+        <div
           className={"events-info swiper-wrapper"}
-          slidesPerView={"auto"}
-          centeredSlides={true}
-          spaceBetween={30}
-          navigation={{
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          }}
-          pagination={{
-            el: ".swiper-pagination",
-            clickable: true,
-          }}
-          autoplay={{
-            delay: 2000,
-            disableOnInteraction: true,
+          style={{
+            marginBottom: "20px",
+            display: "flex",
+            gap: "5px",
           }}
         >
           {plans.map((value, number) => {
             return (
-              <SwiperSlide key={number} className={"events-info-frame"}>
+              <div key={number} className={"events-info-frame"}>
                 <div className={"events-img"}>
                   <img src={value.img} className={"events-img"} alt="" />
                 </div>
@@ -63,11 +53,11 @@ export default function Events() {
                     </Box>
                   </Box>
                 </Box>
-              </SwiperSlide>
+              </div>
             );
           })}
-        </Swiper>
-        <Box className={"prev-next-frame"}>
+        </div>
+        {/* <Box className={"prev-next-frame"}>
           <img
             src={"/icons/arrow-right.svg"}
             className={"swiper-button-prev"}
@@ -80,7 +70,7 @@ export default function Events() {
             style={{ transform: "rotate(-180deg)" }}
             alt=""
           />
-        </Box>
+        </Box> */}
       </Stack>
     </div>
   );
