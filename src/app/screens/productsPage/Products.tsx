@@ -1,4 +1,4 @@
-import { Box, Button, Container, Stack } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -25,6 +25,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
+import Events from "../homPage/Events";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setProducts: (data: Product[]) => dispatch(setProducts(data)),
@@ -102,7 +103,7 @@ export default function Products(props: ProductsProps) {
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Stack className="avatar-big-box">
             <Stack className="top-title">
-              <Box className="top-text">Burak Restaurant</Box>
+              <Box className="top-text">Chustiy Restaurant</Box>
               <Box className="single-search">
                 <input
                   className="single-search-input"
@@ -126,53 +127,7 @@ export default function Products(props: ProductsProps) {
             </Stack>
           </Stack>
           <Stack className="dishes-filter-section">
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <span>Sort</span>
-              <Select
-                value={age}
-                onChange={searchOrderHandler}
-                displayEmpty
-                inputProps={{ "aria-label": "Without label" }}
-              >
-                {/* <MenuItem value=""></MenuItem> */}
-                <MenuItem value={"createdAt"}>createdAt</MenuItem>
-                <MenuItem value={"productPrice"}>productPrice</MenuItem>
-                <MenuItem value={"productViews"}>productViews</MenuItem>
-              </Select>
-            </FormControl>
-            {/* <Button
-              variant="contained"
-              className="order"
-              color={
-                productSearch.order === "createdAt" ? "primary" : "secondary"
-              }
-              onClick={() => searchOrderHandler("createdAt")}
-            >
-              New
-            </Button>
-            <Button
-              variant="contained"
-              className="order"
-              color={
-                productSearch.order === "productPrice" ? "primary" : "secondary"
-              }
-              onClick={() => searchOrderHandler("productPrice")}
-            >
-              Price
-            </Button>
-            <Button
-              variant="contained"
-              className="order"
-              color={
-                productSearch.order === "productViews" ? "primary" : "secondary"
-              }
-              onClick={() => searchOrderHandler("productViews")}
-            >
-              Views
-            </Button> */}
-          </Stack>
-          <Stack className="list-category-section">
-            <Stack className="product-category">
+            <Box className="product-category">
               <Button
                 variant="contained"
                 color={
@@ -230,7 +185,32 @@ export default function Products(props: ProductsProps) {
               >
                 Dessert
               </Button>
-            </Stack>
+            </Box>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span>Sort</span>
+                <Select
+                  value={age}
+                  onChange={searchOrderHandler}
+                  displayEmpty
+                  inputProps={{ "aria-label": "Without label" }}
+                >
+                  {/* <MenuItem value=""></MenuItem> */}
+                  <MenuItem value={"createdAt"}>New</MenuItem>
+                  <MenuItem value={"productPrice"}>Price</MenuItem>
+                  <MenuItem value={"productViews"}>Views</MenuItem>
+                </Select>
+              </Box>
+            </FormControl>
+          </Stack>
+          <Stack className="list-category-section">
             <Stack className="products-wapper">
               {products.length !== 0 ? (
                 products.map((product: Product) => {
@@ -322,36 +302,100 @@ export default function Products(props: ProductsProps) {
           </Stack>
         </Stack>
       </Container>
+
       <div className="brands-logo">
         <Box className="brand-text">Meet Our Team</Box>
         <Stack className="brand-cards">
           <Box className="brand-card">
-            <img src="/img/family1.png" alt="" />
+            <img src="/img/chef1.jpg" alt="" />
           </Box>
           <Box className="brand-card">
-            <img src="/img/family2.png" alt="" />
+            <img src="/img/chef2.jpeg" alt="" />
           </Box>
           <Box className="brand-card">
-            <img src="/img/family3.png" alt="" />
+            <img src="/img/chef3.jpeg" alt="" />
           </Box>
           <Box className="brand-card">
-            <img src="/img/family4.png" alt="" />
+            <img src="/img/chef4.jpeg" alt="" />
           </Box>
         </Stack>
       </div>
-      <div className="address">
-        <Container>
-          <Stack className="address-area">
-            <Box className="title">Our address</Box>
-            <iframe
-              style={{ marginTop: "60px" }}
-              src="https://www.google.com/maps?q=Burak+restaurand+istanbul&amp;t&amp;z=13&amp;ie=UTF8&amp;iwloc&amp;output=embed"
-              height="500px"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+      <Container>
+        <Typography
+          sx={{ marginTop: "30px", fontSize: "20px", fontWeight: "600" }}
+        >
+          Recomended based on your search
+        </Typography>
+        <Stack className="list-category-section" sx={{ marginBottom: "20px" }}>
+          <Stack className="products-wapper">
+            {products.length !== 0 ? (
+              products.map((product: Product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
+
+                const sizeVolume =
+                  product.productCollection === ProductCollection.DRINK
+                    ? product.productVolume + " litre"
+                    : product.productSize + " size";
+                return (
+                  <Stack
+                    key={product._id}
+                    className="product-card"
+                    onClick={() => chooseDishHandler(product._id)}
+                  >
+                    <Stack
+                      className="product-img"
+                      sx={{
+                        background: `url(${imagePath})`,
+                      }}
+                    >
+                      <div className="prodct-sale">{sizeVolume}</div>
+                      <Button
+                        className="shop-btn"
+                        onClick={(e) => {
+                          onAdd({
+                            _id: product._id,
+                            quantity: 1,
+                            name: product.productName,
+                            price: product.productPrice,
+                            image: product.productImages[0],
+                          });
+                          e.stopPropagation();
+                        }}
+                      >
+                        <img src={"/icons/shopping-cart.svg"} alt="" />
+                      </Button>
+                      <Button className="view-btn">
+                        <Badge
+                          badgeContent={product.productViews}
+                          color="secondary"
+                        >
+                          <RemoveRedEyeIcon
+                            sx={{
+                              color:
+                                product.productViews === 0 ? "gray" : "white",
+                            }}
+                          />
+                        </Badge>
+                      </Button>
+                    </Stack>
+                    <Box className="product-desc">
+                      <span className="product-title">
+                        {product.productName}
+                      </span>
+                      <div className="product-desc">
+                        <MonetizationOnIcon color="secondary" />
+                        {product.productPrice}
+                      </div>
+                    </Box>
+                  </Stack>
+                );
+              })
+            ) : (
+              <Box className="no-data">Product are not aviable!</Box>
+            )}
           </Stack>
-        </Container>
-      </div>
+        </Stack>
+      </Container>
     </div>
   );
 }

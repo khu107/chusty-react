@@ -92,6 +92,7 @@
   line-height: normal;
   letter-spacing: -0.75px;
   color: #f8f8ff;
+  text-shadow: 2px 2px 4px #000000;
 }
 .home-navbar .navbar-container .header-frame .detail .wel-txt {
   width: 510px;
@@ -102,7 +103,8 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.54px;
-  color: #d7b686;
+  color: #f8f8ff;
+  text-shadow: 2px 2px 4px #000000;
 }
 .home-navbar .navbar-container .header-frame .detail .service-txt {
   margin-top: 23px;
@@ -114,7 +116,8 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.3px;
-  color: #d5d5d5;
+  color: #f8f8ff;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .home-navbar .navbar-container .detail .signup {
@@ -156,7 +159,7 @@
   width: 100%;
   height: 400px;
   display: flex;
-  background: url("/public/img/banner.webp");
+  background: url("/public/img/background_img.jpg");
   background-size: cover;
 }
 .other-navbar .navbar-container {

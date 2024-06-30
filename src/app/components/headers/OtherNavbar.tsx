@@ -5,6 +5,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Typography,
   Stack,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
@@ -49,7 +50,13 @@ export default function OtherNavbar(props: OtherNavbarProps) {
         <Stack className="menu ">
           <Box>
             <NavLink to="/">
-              <img className="brand-logo" alt="burak" src="/icons/burak.svg" />
+              <Typography
+                variant="h1"
+                sx={{ color: "white", fontWeight: "bold" }}
+              >
+                CHUSTY
+              </Typography>
+              {/* <img className="brand-logo" alt="burak" src="/icons/burak.svg" /> */}
             </NavLink>
           </Box>
           <Stack className="links">
@@ -77,7 +84,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
             ) : null}
             <Box className={"hover-line"}>
               <NavLink to="/help" activeClassName="underline">
-                Help
+                Contact
               </NavLink>
             </Box>
             {/* BASKET */}

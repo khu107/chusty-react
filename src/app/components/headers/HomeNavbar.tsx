@@ -88,7 +88,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             ) : null}
             <Box className={"hover-line"}>
               <NavLink to="/help" activeClassName="underline">
-                Help
+                Contact
               </NavLink>
             </Box>
             {/* BASKET */}
@@ -191,7 +191,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               className="signup-button"
               onClick={() => history.push("/products")}
             >
-              Order Now
+              Explore Products
             </Button>
           </Stack>
 
