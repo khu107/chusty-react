@@ -7,7 +7,7 @@ import OrdersPageReducer from "./screens/ordersPage/slice";
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     // @ts-ignore
-    getDefaultMiddleware().concat(reduxLogger),
+    getDefaultMiddleware().concat(),
   reducer: {
     homePage: HomePageReducer,
     productsPage: ProductsPageReducer,

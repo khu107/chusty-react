@@ -5,23 +5,25 @@ import Typography from "@mui/joy/Typography";
 import { CssVarsProvider } from "@mui/joy/styles";
 import CardOverflow from "@mui/joy/CardOverflow";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import DesciptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import Divider from "../../components/divider";
-
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveNewDishes } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 import { ProductCollection } from "../../../lib/enums/product.enum";
+import { useHistory } from "react-router-dom";
 
 const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
   newDishes,
 }));
 
 export default function NewDishes() {
+  const history = useHistory();
   const { newDishes } = useSelector(newDishesRetriever);
-
+  const chooseDishHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
   return (
     <div className="new-products-frame">
       <Container>
@@ -37,7 +39,12 @@ export default function NewDishes() {
                       ? product.productVolume + "l"
                       : product.productSize + " size";
                   return (
-                    <Card key={product._id} variant="outlined" className="card">
+                    <Card
+                      key={product._id}
+                      variant="outlined"
+                      className="card"
+                      onClick={() => chooseDishHandler(product._id)}
+                    >
                       <CardOverflow>
                         <div className="product-sale">{sizeVolume}</div>
                         <AspectRatio ratio="1">

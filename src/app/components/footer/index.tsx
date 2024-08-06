@@ -25,14 +25,14 @@ export default function Footer() {
             </Box>
             <Box className={"foot-desc-txt"}>
               Focusing on the gourmet Turkish breakfast as well as the youth
-              society, CZN Burak Gurme aims to bring Turkish cuisine back. CZN
-              Burak Gurme creates an illusion with its cuisine.
+              society, CZN Chusty Gurme aims to bring Turkish cuisine back. CZN
+              Chusty Gurme creates an illusion with its cuisine.
             </Box>
             <Box className="sns-context">
-              <img src={"/icons/facebook.svg"} />
-              <img src={"/icons/twitter.svg"} />
-              <img src={"/icons/instagram.svg"} />
-              <img src={"/icons/youtube.svg"} />
+              <img src={"/icons/facebook.svg"} alt="svg" />
+              <img src={"/icons/twitter.svg"} alt="svg" />
+              <img src={"/icons/instagram.svg"} alt="svg" />
+              <img src={"/icons/youtube.svg"} alt="svg" />
             </Box>
           </Stack>
           <Stack sx={{ ml: "288px" }} flexDirection={"row"}>
@@ -66,7 +66,7 @@ export default function Footer() {
                   </Box>
                   <Box className={"find-us"}>
                     <span>E.</span>
-                    <div>devexuz@gmail.com</div>
+                    <div>khu10735@gmail.com</div>
                   </Box>
                   <Box className={"find-us"}>
                     <span>H.</span>
